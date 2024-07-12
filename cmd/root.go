@@ -12,7 +12,6 @@ var rootCmd = &cobra.Command{
 	Use:   "mergectl",
 	Short: "USAGE: mergectl [source branch] [target branch]",
 	Long:  `mergectl is a tool of "git merge".`,
-	Args:  cobra.ExactArgs(2), // 複数の引数を受け入れて、再帰的に0, 1マージをするようにしないといけない
 	Run: func(cmd *cobra.Command, args []string) {
 		err := mergeRecersively(args)
 		if err != nil {
@@ -44,7 +43,7 @@ func runCommand(name string, args ...string) error {
 
 func mergeRecersively(branches []string) error {
 	for i := 0; i < len(branches)-1; i++ {
-		err := merge(branches[i], branches[i + 1])
+		err := merge(branches[i], branches[i+1])
 		if err != nil {
 			return err
 		}
