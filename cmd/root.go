@@ -16,7 +16,6 @@ var rootCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		sourceBranch := args[0]
 		targetBranch := args[1]
-		// src branchもpullして最新にしないといけなさそう
 		if err := runCommand("git", "checkout", targetBranch); err != nil {
 			fmt.Println(err)
 			return
