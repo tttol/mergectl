@@ -40,7 +40,7 @@ var mergeCmd = &cobra.Command{
 			return
 		}
 
-		fmt.Printf("Successfully merged %s into %s\n", sourceBranch, targetBranch)
+		fmt.Printf("Successfully merged [%s] into [%s]\n", sourceBranch, targetBranch)
 	},
 }
 
@@ -49,6 +49,12 @@ func init() {
 }
 
 func runCommand(name string, args ...string) error {
+	command := name
+	for _, a := range args {
+		command += " " + a
+	}
+	fmt.Printf("Running... [%s]\n", command)
+
 	cmd := exec.Command(name, args...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr

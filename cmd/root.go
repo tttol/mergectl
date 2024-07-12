@@ -11,11 +11,11 @@ var rootCmd = &cobra.Command{
 	Use:   "mergectl",
 	Short: "USAGE: mergectl [source branch] [target branch]",
 	Long:  `mergectl is a tool of "git merge".`,
-	Args:  cobra.ExactArgs(2),
+	Args:  cobra.ExactArgs(2), // 複数の引数を受け入れて、再帰的に0, 1マージをするようにしないといけない
 	Run: func(cmd *cobra.Command, args []string) {
 		sourceBranch := args[0]
 		targetBranch := args[1]
-
+		// src branchもpullして最新にしないといけなさそう
 		if err := runCommand("git", "checkout", targetBranch); err != nil {
 			fmt.Println(err)
 			return
@@ -26,7 +26,7 @@ var rootCmd = &cobra.Command{
 			return
 		}
 
-		if err := runCommand("git", "merge", sourceBranch); err != nil {
+		if err := runCommand("git", "merge", "remotes/origin/" + sourceBranch); err != nil {
 			fmt.Println(err)
 			return
 		}
