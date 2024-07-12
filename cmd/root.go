@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"os/exec"
 
 	"github.com/spf13/cobra"
 )
@@ -26,7 +27,7 @@ var rootCmd = &cobra.Command{
 			return
 		}
 
-		if err := runCommand("git", "merge", "remotes/origin/" + sourceBranch); err != nil {
+		if err := runCommand("git", "merge", "remotes/origin/"+sourceBranch, "--no-ff"); err != nil {
 			fmt.Println(err)
 			return
 		}
@@ -36,7 +37,7 @@ var rootCmd = &cobra.Command{
 			return
 		}
 
-		fmt.Printf("Successfully merged %s into %s\n", sourceBranch, targetBranch)
+		fmt.Printf("Successfully merged [%s] into [%s]\n", sourceBranch, targetBranch)
 	},
 }
 
@@ -45,4 +46,17 @@ func Execute() {
 		fmt.Println(err)
 		os.Exit(1)
 	}
+}
+
+func runCommand(name string, args ...string) error {
+	command := name
+	for _, a := range args {
+		command += " " + a
+	}
+	fmt.Printf("Running... [%s]\n", command)
+
+	cmd := exec.Command(name, args...)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	return cmd.Run()
 }
