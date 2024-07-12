@@ -29,7 +29,7 @@ var mergeCmd = &cobra.Command{
 		}
 
 		// Merge the source branch into the target branch
-		if err := runCommand("git", "merge", sourceBranch); err != nil {
+		if err := runCommand("git", "merge", sourceBranch, "--no-ff"); err != nil {
 			fmt.Println(err)
 			return
 		}
