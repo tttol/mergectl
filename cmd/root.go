@@ -14,29 +14,11 @@ var rootCmd = &cobra.Command{
 	Long:  `mergectl is a tool of "git merge".`,
 	Args:  cobra.ExactArgs(2), // 複数の引数を受け入れて、再帰的に0, 1マージをするようにしないといけない
 	Run: func(cmd *cobra.Command, args []string) {
-		sourceBranch := args[0]
-		targetBranch := args[1]
-		if err := runCommand("git", "checkout", targetBranch); err != nil {
+		err := mergeRecersively(args)
+		if err != nil {
 			fmt.Println(err)
 			return
 		}
-
-		if err := runCommand("git", "pull"); err != nil {
-			fmt.Println(err)
-			return
-		}
-
-		if err := runCommand("git", "merge", "remotes/origin/"+sourceBranch, "--no-ff"); err != nil {
-			fmt.Println(err)
-			return
-		}
-
-		if err := runCommand("git", "push"); err != nil {
-			fmt.Println(err)
-			return
-		}
-
-		fmt.Printf("Successfully merged [%s] into [%s]\n", sourceBranch, targetBranch)
 	},
 }
 
@@ -58,4 +40,35 @@ func runCommand(name string, args ...string) error {
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	return cmd.Run()
+}
+
+func mergeRecersively(branches []string) error {
+	for i := 0; i < len(branches)-1; i++ {
+		err := merge(branches[i], branches[i + 1])
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func merge(srcBranch string, targetBranch string) error {
+	if err := runCommand("git", "checkout", targetBranch); err != nil {
+		return err
+	}
+
+	if err := runCommand("git", "pull"); err != nil {
+		return err
+	}
+
+	if err := runCommand("git", "merge", "remotes/origin/"+srcBranch, "--no-ff"); err != nil {
+		return err
+	}
+
+	if err := runCommand("git", "push"); err != nil {
+		return err
+	}
+
+	fmt.Printf("Successfully merged [%s] into [%s]\n", srcBranch, targetBranch)
+	return nil
 }
