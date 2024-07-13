@@ -16,7 +16,7 @@ ARCH=$(uname -m)
 
 echo "Start to install. VERSION=$VERSION, OS=$OS, ARCH=$ARCH"
 
-URL="https://github.com/tttol/mergectl/releases/download/v$VERSION/mergectl-$OS-$ARCH.tar.gz"
+URL="https://github.com/tttol/mergectl/releases/download/$VERSION/mergectl_$OS_$ARCH.tar.gz"
 
 TMP_DIR=$(mktemp -d)
 curl -L $URL -o $TMP_DIR/mergectl.tar.gz
@@ -26,4 +26,8 @@ sudo chmod +x /usr/local/bin/mergectl
 
 rm -rf $TMP_DIR
 
-echo "mergectl $VERSION has been installed to /usr/local/bin !"
+if [ -f "$/usr/local/bin/mergectl" ]; then
+  echo "mergectl $VERSION has been installed to /usr/local/bin !"
+else
+  echo "mergectl $VERSION is not installed."
+fi
