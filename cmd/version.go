@@ -6,13 +6,13 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var version string
+var Version string
 
 var versionCmd = &cobra.Command{
 	Use:   "version",
 	Short: "Print the version number of mergectl",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("mergectl version:", version)
+		fmt.Println("mergectl version:", Version)
 	},
 }
 
