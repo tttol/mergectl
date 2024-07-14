@@ -13,10 +13,11 @@ cd [path to git repository]
 mergectl [source branch] [target branch 1] [target branch 2] [target branch 3] ...
 ```
 
-`mergectl main test1` means following commands below
-```bash
-git checkout test1
-git pull
-git merge remotes/origin/main --no-ff
-git push
-```
+> [!NOTE]
+> `mergectl main test1` means following commands below
+> ```bash
+> git checkout test1
+> git pull
+> git merge remotes/origin/main --no-ff
+> git push
+> ```
