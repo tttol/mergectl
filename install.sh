@@ -27,8 +27,8 @@ sudo chmod +x /usr/local/bin/mergectl
 
 rm -rf $TMP_DIR
 
-if [ -f "$/usr/local/bin/mergectl" ]; then
-  echo "[SUCCESS] mergectl $VERSION has been installed to /usr/local/bin !"
+if [ -f "/usr/local/bin/mergectl" ]; then
+  echo "[SUCCESS] mergectl $VERSION has been installed to /usr/local/bin"
 else
   echo "[FAIL] mergectl $VERSION is not installed."
 fi
