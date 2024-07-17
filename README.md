@@ -4,11 +4,13 @@ Merge multiple git branches.
 
 # Install
 ## Mac, Linux
+Run the following command on terminal.
 ```bash
 curl -fsSL https://raw.githubusercontent.com/tttol/mergectl/main/install.sh | sh
 ```
 
 ## Windows
+Run the following command on PowerShell.
 ```ps1
 powershell -Command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/tttol/mergectl/main/install.ps1 -OutFile install.ps1; .\install.ps1"
 ```
