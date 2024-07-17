@@ -9,10 +9,9 @@ curl -fsSL https://raw.githubusercontent.com/tttol/mergectl/main/install.sh | sh
 ```
 
 ## Windows
-mergectl CANNOT run on the cmd and PowerShell.  
-Please install WSL2 then install with command for Linux.  
-  
-We are currently working on making it possible to run on cmd and PowerShell. 
+```ps1
+powershell -Command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/tttol/mergectl/main/install.ps1 -OutFile install.ps1; .\install.ps1"
+```
 
 # Usage
 ```bash
