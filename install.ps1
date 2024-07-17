@@ -1,8 +1,6 @@
 $ErrorActionPreference = 'Stop'
 
-param (
-    [string]$Version
-)
+[string]$Version
 
 if (-not $Version) {
     Write-Host "Fetching the latest version..."
