@@ -37,9 +37,16 @@ archives:
       {{- else if eq .Arch "386" }}i386
       {{- else }}{{ .Arch }}{{ end }}
       {{- if .Arm }}v{{ .Arm }}{{ end }}
+    # use zip for windows archives
+    format_overrides:
+      - goos: windows
+        format: zip
 changelog:
   sort: asc
   filters:
     exclude:
       - "^docs:"
       - "^test:"
+blobs:
+  - source: ./install.ps1
+    name_template: "install.ps1"
