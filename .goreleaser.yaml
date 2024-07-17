@@ -25,8 +25,12 @@ builds:
       - linux
       - windows
       - darwin
+    goarch:
+      - amd64
+      - arm64
     flags:
       - -trimpath
+
 archives:
   - format: tar.gz
     # this name template makes the OS and Arch compatible with the results of `uname`.
@@ -37,16 +41,18 @@ archives:
       {{- else if eq .Arch "386" }}i386
       {{- else }}{{ .Arch }}{{ end }}
       {{- if .Arm }}v{{ .Arm }}{{ end }}
-    # use zip for windows archives
+    files:
+      - README.md
+      - LICENSE
+      - install.sh
+      - install.ps1
     format_overrides:
       - goos: windows
         format: zip
+
 changelog:
   sort: asc
   filters:
     exclude:
       - "^docs:"
       - "^test:"
-blobs:
-  - source: ./install.ps1
-    name_template: "install.ps1"
